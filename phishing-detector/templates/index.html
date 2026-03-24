@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Phishing Detector</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI';
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 80px;
+        }
+
+        h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 60%;
+            height: 120px;
+            border-radius: 10px;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 12px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background: #ef4444;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #dc2626;
+        }
+
+        .result {
+            margin-top: 30px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .card {
+            margin: 20px auto;
+            padding: 15px;
+            width: 50%;
+            background: #1e293b;
+            border-radius: 10px;
+        }
+
+        .tag {
+            display: inline-block;
+            margin: 5px;
+            padding: 5px 10px;
+            background: #f59e0b;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🔐 AI Phishing Detection System</h1>
+    <p>Analyze emails for phishing threats using AI</p>
+
+    <form action="/predict" method="post">
+        <textarea name="email" placeholder="Paste email content here..."></textarea>
+        <br>
+        <button type="submit">Scan Email</button>
+    </form>
+
+    {% if result %}
+        <div class="result">{{ result }}</div>
+
+        <div class="card">
+            {% if url_flag %}
+                <p>🔗 URL detected in email</p>
+            {% endif %}
+
+            {% if keywords %}
+                <p>⚠️ Suspicious Keywords:</p>
+                {% for word in keywords %}
+                    <span class="tag">{{ word }}</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
