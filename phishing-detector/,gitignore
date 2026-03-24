@@ -1,0 +1,4 @@
+model.pkl
+vectorizer.pkl
+logs.txt
+__pycache__/
